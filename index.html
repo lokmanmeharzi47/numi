@@ -1,102 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="EAU DE PARFUM – Luxury perfume by Numidia Lezoul. Discover the Signature Collection.">
     <title>EAU DE PARFUM – Numidia Lezoul</title>
 
-    <!-- Premium Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;700&family=Cinzel+Decorative:wght@400;700&family=Montserrat:wght@300;400;600&display=swap"
         rel="stylesheet">
-
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <div id="loader">
+        <div class="loader-logo">NUMIDIA</div>
+        <div style="color: var(--gold); font-size: 0.7rem; margin-top: 15px; letter-spacing: 5px;">CE QUE JE PORTE</div>
+    </div>
 
-    <!-- Floating gold particles background -->
+    <div class="bokeh-container">
+        <div class="bokeh-orb" style="width: 500px; height: 500px; top: -10%; left: -20%;"></div>
+        <div class="bokeh-orb" style="width: 600px; height: 600px; bottom: -5%; right: -20%;"></div>
+    </div>
+
     <canvas id="particles-canvas"></canvas>
 
     <div class="mobile-container">
-
-        <!-- ====== 1. HERO SECTION ====== -->
         <header class="hero-section">
-            <!-- Hero image contains the gold frame — it IS the container -->
-            <img src="hero.png" alt="Numidia Lezoul presenting CE QUE JE PORTE perfume" class="hero-image anim-fade"
-                data-delay="100">
-
-            <!-- Text positioned absolutely inside the transparent frame area -->
-            <div class="hero-text anim-fade" data-delay="100">
-                <h1 class="banner-title">CE QUE JE PORTE</h1>
-                <p class="banner-subtitle">NUMIDIA LEZOUL</p>
-                <div class="banner-divider"></div>
-                <p class="banner-arabic" dir="rtl">عطر فاخر بلمسة أنثوية</p>
+            <img src="hero.png" alt="Numidia Lezoul" class="hero-image" id="heroImg">
+            <div class="hero-text anim-reveal">
+                <span class="banner-title">CE QUE JE PORTE</span><br>
+                <span
+                    style="font-family: 'Cinzel', serif; font-size: 0.75rem; color: var(--gold); letter-spacing: 6px;">NUMIDIA
+                    LEZOUL</span>
+                <div style="width: 60px; height: 1.5px; background: var(--gold); margin: 15px auto; opacity: 0.8;">
+                </div>
+                <span style="font-family: 'Amiri', serif; font-size: 1.2rem; color: rgba(255,255,255,0.95);">عطر فاخر
+                    بلمسة أنثوية ساحرة</span>
             </div>
         </header>
 
-        <!-- ====== 2. CONTENT BELOW HERO ====== -->
         <main class="content-section">
+            <a href="https://parfumnumidia.com/products/ce-que-je-porte" target="_blank"
+                class="btn btn--shop anim-reveal">
+                <i class="fa-solid fa-bag-shopping"></i> تسوقي الآن
+            </a>
 
-            <!-- Product Info Row -->
-            <section class="product-row anim-fade" data-delay="300">
-                <a href="#" class="product-card" id="product-card">
-                    <div class="product-icon-wrap">
-                        <i class="fa-solid fa-spray-can-sparkles product-icon"></i>
-                    </div>
-                    <div class="product-info">
-                        <h2 class="product-name">EAU DE PARFUM</h2>
-                        <p class="product-desc">100ML – Signature Collection</p>
-                    </div>
-                    <div class="product-arrow">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                </a>
-            </section>
+            <a href="https://www.instagram.com/numidialezoul_official/" target="_blank"
+                class="btn btn--glass anim-reveal">
+                <i class="fa-brands fa-instagram"></i> انستغرام
+            </a>
 
-            <!-- Premium Action Buttons -->
-            <section class="actions-section">
-                <!-- 1) Gold gradient button -->
-                <a href="#" class="btn btn--shop anim-fade" data-delay="400" id="btn-shop">
-                    <i class="fa-solid fa-bag-shopping btn-icon"></i>
-                    <span>SHOP NOW</span>
-                </a>
+            <a href="https://www.youtube.com/channel/UCIkmEe-fWe80bna7R1oASyA" target="_blank"
+                class="btn btn--glass anim-reveal">
+                <i class="fa-brands fa-youtube"></i> يوتيوب
+            </a>
 
-                <!-- 2) Black glass button with gold border -->
-                <a href="#" class="btn btn--glass anim-fade" data-delay="500" id="btn-instagram">
-                    <i class="fa-brands fa-instagram btn-icon"></i>
-                    <span>FOLLOW ON INSTAGRAM</span>
-                </a>
+            <a href="mailto:numidialezoul19@gmail.com" class="btn btn--glass anim-reveal">
+                <i class="fa-solid fa-envelope"></i> تواصل معنا (البريد)
+            </a>
 
-                <!-- 3) Black glass button with gold border -->
-                <a href="#" class="btn btn--glass anim-fade" data-delay="600" id="btn-youtube">
-                    <i class="fa-brands fa-youtube btn-icon"></i>
-                    <span>WATCH ON YOUTUBE</span>
-                </a>
-
-                <!-- 4) Black glass button with gold border -->
-                <a href="#" class="btn btn--glass anim-fade" data-delay="700" id="btn-email">
-                    <i class="fa-solid fa-envelope btn-icon"></i>
-                    <span>CONTACT VIA EMAIL</span>
-                </a>
-            </section>
-
+            <div class="testimonial-card anim-reveal"
+                style="background: rgba(212, 175, 55, 0.05); border: 1px solid rgba(212, 175, 55, 0.15); padding: 30px; border-radius: 25px; text-align: center; backdrop-filter: blur(10px); margin-top: 10px;">
+                <div style="margin-bottom: 15px; letter-spacing: 8px;">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p style="font-family: 'Amiri', serif; font-size: 1.35rem; line-height: 1.8; color: #fff; margin: 0;">
+                    "فخامة تليق بكل امرأة جزائرية تعشق التميز."
+                </p>
+            </div>
         </main>
 
-        <!-- ====== 3. FOOTER ====== -->
-        <footer class="footer anim-fade" data-delay="800">
-            <div class="footer-line"></div>
-            <p class="footer-text">&copy; 2026 Numidia Lezoul</p>
+        <footer class="footer anim-reveal">
+            <p>&copy; 2026 NUMIDIA LEZOUL. SIGNATURE COLLECTION</p>
         </footer>
-
     </div>
 
     <script src="script.js"></script>

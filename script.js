@@ -1,133 +1,65 @@
-/**
- * script.js
- * Luxury perfume link-in-bio — Particles + Entrance animations
- */
+// محرك النجوم الضخمة المتلألئة
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouse = { x: -2000, y: -2000 };
 
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+window.addEventListener('touchstart', (e) => { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY; });
 
-    /* ===============================
-       1. GOLD FLOATING PARTICLES
-       =============================== */
-    const canvas = document.getElementById('particles-canvas');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        const PARTICLE_COUNT = 45;
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        function createParticle() {
-            return {
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                size: Math.random() * 1.8 + 0.4,
-                speedY: -(Math.random() * 0.3 + 0.08),
-                speedX: (Math.random() - 0.5) * 0.15,
-                opacity: Math.random() * 0.35 + 0.05,
-                fadeDir: Math.random() > 0.5 ? 1 : -1,
-                fadeSpeed: Math.random() * 0.003 + 0.001
-            };
-        }
-
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < PARTICLE_COUNT; i++) {
-                particles.push(createParticle());
-            }
-        }
-
-        function drawParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach(p => {
-                // Drift
-                p.y += p.speedY;
-                p.x += p.speedX;
-
-                // Twinkle
-                p.opacity += p.fadeDir * p.fadeSpeed;
-                if (p.opacity >= 0.4) { p.fadeDir = -1; }
-                if (p.opacity <= 0.03) { p.fadeDir = 1; }
-
-                // Reset if off screen
-                if (p.y < -10) {
-                    p.y = canvas.height + 10;
-                    p.x = Math.random() * canvas.width;
-                }
-                if (p.x < -10) p.x = canvas.width + 10;
-                if (p.x > canvas.width + 10) p.x = -10;
-
-                // Draw
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(212, 175, 55, ${p.opacity})`;
-                ctx.fill();
-
-                // Soft glow halo on larger particles
-                if (p.size > 1.2) {
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(212, 175, 55, ${p.opacity * 0.15})`;
-                    ctx.fill();
-                }
-            });
-
-            requestAnimationFrame(drawParticles);
-        }
-
-        resizeCanvas();
-        initParticles();
-        drawParticles();
-
-        window.addEventListener('resize', () => {
-            resizeCanvas();
-            initParticles();
+function initCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    particles = [];
+    for (let i = 0; i < 32; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 6 + 4, // نجوم ضخمة
+            speed: Math.random() * 0.15 + 0.1,
+            velX: (Math.random() - 0.5) * 0.2,
+            opacity: Math.random(),
+            twinkle: Math.random() * 0.012
         });
     }
+}
 
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach((p) => {
+        p.y -= p.speed; p.x += p.velX;
+        let dx = mouse.x - p.x; let dy = mouse.y - p.y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 200) { p.x -= dx / 40; p.y -= dy / 40; }
+        p.opacity += p.twinkle;
+        if (p.opacity > 0.9 || p.opacity < 0.2) p.twinkle *= -1;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
 
-    /* ===============================
-       2. STAGGERED ENTRANCE ANIMATIONS
-       =============================== */
-    const animElements = document.querySelectorAll('.anim-fade');
+        ctx.save();
+        ctx.shadowBlur = 30; ctx.shadowColor = "rgba(212, 175, 55, 0.8)";
+        ctx.fillStyle = `rgba(212, 175, 55, ${Math.abs(p.opacity)})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
 
-    // Use IntersectionObserver for scroll-triggered reveals
-    if ('IntersectionObserver' in window) {
+        // قلب النجمة الساطع
+        ctx.fillStyle = `rgba(255, 245, 220, ${p.opacity + 0.1})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size * 0.4, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+    });
+    requestAnimationFrame(draw);
+}
+
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('loader').classList.add('loader-hidden');
+        document.getElementById('heroImg').classList.add('loaded');
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const delay = parseInt(el.dataset.delay || '0', 10);
-                    setTimeout(() => {
-                        el.classList.add('visible');
-                    }, delay);
-                    observer.unobserve(el);
-                }
-            });
-        }, {
-            threshold: 0.15,
-            rootMargin: '0px 0px -30px 0px'
-        });
-
-        animElements.forEach(el => observer.observe(el));
-    } else {
-        // Fallback: just show everything
-        animElements.forEach(el => el.classList.add('visible'));
-    }
-
-
-    /* ===============================
-       3. SHIMMER ON BANNER TITLE
-       =============================== */
-    const bannerTitle = document.querySelector('.banner-title');
-    if (bannerTitle) {
-        // Activate shimmer after the fade-in completes
-        setTimeout(() => {
-            bannerTitle.classList.add('shimmer-active');
-        }, 1200);
-    }
-
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.anim-reveal').forEach(el => observer.observe(el));
+    }, 1200);
 });
+
+initCanvas(); draw();
+window.addEventListener('resize', initCanvas);
