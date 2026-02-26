@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="EAU DE PARFUM – Luxury perfume by Numidia Lezoul. Discover the Signature Collection.">
+    <title>EAU DE PARFUM – Numidia Lezoul</title>
+
+    <!-- Premium Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Floating gold particles background -->
+    <canvas id="particles-canvas"></canvas>
+
+    <div class="mobile-container">
+
+        <!-- ====== 1. HERO SECTION ====== -->
+        <header class="hero-section">
+            <!-- Hero image contains the gold frame — it IS the container -->
+            <img src="hero.png" alt="Numidia Lezoul presenting CE QUE JE PORTE perfume" class="hero-image anim-fade"
+                data-delay="100">
+
+            <!-- Text positioned absolutely inside the transparent frame area -->
+            <div class="hero-text anim-fade" data-delay="100">
+                <h1 class="banner-title">CE QUE JE PORTE</h1>
+                <p class="banner-subtitle">NUMIDIA LEZOUL</p>
+                <div class="banner-divider"></div>
+                <p class="banner-arabic" dir="rtl">عطر فاخر بلمسة أنثوية</p>
+            </div>
+        </header>
+
+        <!-- ====== 2. CONTENT BELOW HERO ====== -->
+        <main class="content-section">
+
+            <!-- Product Info Row -->
+            <section class="product-row anim-fade" data-delay="300">
+                <a href="#" class="product-card" id="product-card">
+                    <div class="product-icon-wrap">
+                        <i class="fa-solid fa-spray-can-sparkles product-icon"></i>
+                    </div>
+                    <div class="product-info">
+                        <h2 class="product-name">EAU DE PARFUM</h2>
+                        <p class="product-desc">100ML – Signature Collection</p>
+                    </div>
+                    <div class="product-arrow">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </a>
+            </section>
+
+            <!-- Premium Action Buttons -->
+            <section class="actions-section">
+                <!-- 1) Gold gradient button -->
+                <a href="#" class="btn btn--shop anim-fade" data-delay="400" id="btn-shop">
+                    <i class="fa-solid fa-bag-shopping btn-icon"></i>
+                    <span>SHOP NOW</span>
+                </a>
+
+                <!-- 2) Black glass button with gold border -->
+                <a href="#" class="btn btn--glass anim-fade" data-delay="500" id="btn-instagram">
+                    <i class="fa-brands fa-instagram btn-icon"></i>
+                    <span>FOLLOW ON INSTAGRAM</span>
+                </a>
+
+                <!-- 3) Black glass button with gold border -->
+                <a href="#" class="btn btn--glass anim-fade" data-delay="600" id="btn-youtube">
+                    <i class="fa-brands fa-youtube btn-icon"></i>
+                    <span>WATCH ON YOUTUBE</span>
+                </a>
+
+                <!-- 4) Black glass button with gold border -->
+                <a href="#" class="btn btn--glass anim-fade" data-delay="700" id="btn-email">
+                    <i class="fa-solid fa-envelope btn-icon"></i>
+                    <span>CONTACT VIA EMAIL</span>
+                </a>
+            </section>
+
+        </main>
+
+        <!-- ====== 3. FOOTER ====== -->
+        <footer class="footer anim-fade" data-delay="800">
+            <div class="footer-line"></div>
+            <p class="footer-text">&copy; 2026 Numidia Lezoul</p>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

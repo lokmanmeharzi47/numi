@@ -1,0 +1,446 @@
+/* ==============================
+   LUXURY THEME VARIABLES
+   ============================== */
+:root {
+    --gold: #d4af37;
+    --gold-light: #f3e5ab;
+    --gold-dark: #b8962e;
+    --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f5e6a3 40%, #d4af37 60%, #b8962e 100%);
+    --gold-border: rgba(212, 175, 55, 0.3);
+    --gold-glow: rgba(212, 175, 55, 0.12);
+
+    --bg-deep: #020202;
+    --bg-container: #080808;
+    --bg-card: linear-gradient(145deg, #111111 0%, #0a0a0a 50%, #0d0d0d 100%);
+    --bg-glass: rgba(255, 255, 255, 0.025);
+
+    --white: #f5f5f5;
+    --white-soft: rgba(255, 255, 255, 0.7);
+    --white-muted: rgba(255, 255, 255, 0.35);
+
+    --shadow-deep: 0 20px 60px rgba(0, 0, 0, 0.8), 0 4px 20px rgba(0, 0, 0, 0.5);
+    --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.6);
+    --shadow-glow: 0 0 30px rgba(212, 175, 55, 0.08);
+
+    --radius-card: 26px;
+    --radius-product: 20px;
+    --radius-btn: 30px;
+
+    --ease-luxury: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+
+/* ==============================
+   RESET & BASE
+   ============================== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-deep);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+
+/* ==============================
+   PARTICLES CANVAS (background)
+   ============================== */
+#particles-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+
+/* ==============================
+   MOBILE CONTAINER
+   ============================== */
+.mobile-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    background: radial-gradient(circle at center, rgba(25, 20, 10, 0.8) 0%, var(--bg-container) 60%, #000 100%);
+    box-shadow: 0 0 80px rgba(0, 0, 0, 0.95);
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ==============================
+   HERO SECTION — OVERLAP LAYERING
+   (UNTOUCHED z-index technique)
+   ============================== */
+.hero-section {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+    object-fit: contain;
+}
+
+
+/* ==============================
+   HERO TEXT — positioned inside the
+   transparent frame area of hero.png
+   ============================== */
+
+/*
+ * The hero image contains a gold frame with a transparent center.
+ * .hero-text is absolutely positioned over that transparent area.
+ * No extra background or border — the PNG IS the container.
+ */
+.hero-text {
+    position: absolute;
+    z-index: 3;
+
+    /* Position centered at the bottom portion of the hero image
+       where the transparent frame opening sits */
+    bottom: 6%;
+    transform: translateX(-50%);
+
+    /* Fill the frame opening — adjust width to stay inside the gold border */
+    width: 78%;
+    max-width: 380px;
+
+    text-align: center;
+    padding-top: 0px;
+
+    /* No background — the transparent frame shows through */
+    pointer-events: none;
+}
+
+/* Typography — kept from original luxury styles */
+
+
+
+.banner-title {
+    font-family: 'Cinzel Decorative', 'Cinzel', serif;
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    line-height: 1.3;
+    margin-bottom: 8px;
+
+    /* Gold gradient text */
+    background: var(--gold-gradient);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Shimmer animation on gold title */
+.banner-title.shimmer-active {
+    animation: goldShimmer 3.5s ease-in-out infinite;
+}
+
+@keyframes goldShimmer {
+    0% {
+        background-position: -100% 0;
+    }
+
+    50% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+.banner-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.banner-divider {
+    width: 40px;
+    height: 1px;
+    margin: 0 auto 12px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.5;
+}
+
+.banner-arabic {
+    font-family: 'Amiri', serif;
+    font-size: 1.1rem;
+    color: var(--white-soft);
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+
+/* ==============================
+   CONTENT SECTION
+   ============================== */
+.content-section {
+    width: 100%;
+    padding: 28px 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+}
+
+
+/* ==============================
+   PRODUCT INFO ROW
+   ============================== */
+.product-row {
+    width: 100%;
+}
+
+.product-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: var(--white);
+
+    background: rgba(12, 12, 12, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    /* thin gold border */
+    border-radius: var(--radius-product);
+
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+    /* subtle gold gradient glow */
+    transition: all 0.4s var(--ease-luxury);
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-product);
+    background: radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-luxury);
+}
+
+.product-card:hover {
+    border-color: rgba(212, 175, 55, 0.5);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-soft), 0 0 25px rgba(212, 175, 55, 0.08);
+}
+
+.product-card:hover::before {
+    opacity: 1;
+}
+
+.product-icon-wrap {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(212, 175, 55, 0.04) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    flex-shrink: 0;
+}
+
+.product-icon {
+    font-size: 1.15rem;
+    color: var(--gold);
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+}
+
+.product-desc {
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--white-muted);
+    letter-spacing: 0.8px;
+}
+
+.product-arrow {
+    color: var(--gold);
+    font-size: 0.75rem;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.product-card:hover .product-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+}
+
+
+/* ==============================
+   PREMIUM ACTION BUTTONS
+   ============================== */
+.actions-section {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 8px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 24px;
+    border-radius: var(--radius-btn);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.4s var(--ease-luxury);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-btn);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.btn-icon {
+    font-size: 1.1rem;
+}
+
+
+/* --- Shop Now: Gold Gradient Fill --- */
+.btn--shop {
+    background: var(--gold-gradient);
+    background-size: 200% 100%;
+    color: #0a0a0a;
+    border: none;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+}
+
+.btn--shop:hover {
+    background-position: 100% 0;
+    box-shadow: 0 8px 35px rgba(212, 175, 55, 0.35);
+}
+
+
+/* --- Black Glass Buttons --- */
+.btn--glass {
+    background: rgba(10, 10, 10, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--gold);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.btn--glass::after {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.02) 100%);
+}
+
+.btn--glass:hover {
+    border-color: var(--gold);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+    color: var(--white);
+}
+
+.btn--glass:hover::after {
+    opacity: 1;
+}
+
+
+/* ==============================
+   FOOTER
+   ============================== */
+.footer {
+    text-align: center;
+    padding: 28px 20px 24px;
+}
+
+.footer-line {
+    width: 60px;
+    height: 1px;
+    margin: 0 auto 16px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+}
+
+.footer-text {
+    font-size: 0.8rem;
+    color: rgba(212, 175, 55, 0.75); /* soft gold */
+    letter-spacing: 1.5px;
+    font-weight: 400;
+}
+
+
+/* ==============================
+   ANIMATIONS
+   ============================== */
+
+/* Fade-in elements (JS-controlled) */
+.anim-fade {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s var(--ease-luxury),
+        transform 0.9s var(--ease-luxury);
+}
+
+.anim-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
